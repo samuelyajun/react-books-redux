@@ -75,33 +75,6 @@ class BookApi {
     });
   }
 
-  static saveBook(book) {
-    debugger;
-    book = Object.assign({}, book); // to avoid manipulating object passed in.
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // Simulate server-side validation
-        const minBookTitleLength = 1;
-        if (book.title.length < minBookTitleLength) {
-          reject(`Title must be at least ${minBookTitleLength} characters.`);
-        }
-
-        if (book.id) {
-          const existingBookIndex = books.findIndex(a => a.id == book.id);
-          books.splice(existingBookIndex, 1, book);
-        } else {
-          //Just simulating creation here.
-          //The server would generate ids and watchHref's for new books in a real app.
-          //Cloning so copy returned is passed by value rather than by reference.
-          book.id = generateId(book);
-          book.watchHref = `http://www.pluralsight.com/books/${book.id}`;
-          books.push(book);
-        }
-
-        resolve(book);
-      }, delay);
-    });
-  }
 
   //.....
   static searchBook(query) {
