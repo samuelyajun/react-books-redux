@@ -17,10 +17,6 @@ class CoursesPage extends React.Component {
 		return <div key={index}>{course.title}</div>;
 	}
 
-	// redirectToAddCoursePage() {
-	// 	debugger;
-	// 	browserHistory.push('/course');
-	// }
 
 	render() {
 		debugger;
