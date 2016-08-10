@@ -3,7 +3,7 @@ import delay from './delay';
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
-const courses = [
+const books = [
     {
         "id": 1,
         "title": "a",
@@ -60,60 +60,60 @@ function replaceAll(str, find, replace) {
 }
 
 //This would be performed on the server in a real app. Just stubbing in.
-const generateId = (course) => {
+const generateId = (book) => {
   debugger;
-  return replaceAll(course.title, ' ', '-');
+  return replaceAll(book.title, ' ', '-');
 };
 
-class CourseApi {
-  static getAllCourses() {
+class BookApi {
+  static getAllBooks() {
     debugger;
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(Object.assign([], courses));
+        resolve(Object.assign([], books));
       }, delay);
     });
   }
 
-  static saveCourse(course) {
+  static saveBook(book) {
     debugger;
-    course = Object.assign({}, course); // to avoid manipulating object passed in.
+    book = Object.assign({}, book); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // Simulate server-side validation
-        const minCourseTitleLength = 1;
-        if (course.title.length < minCourseTitleLength) {
-          reject(`Title must be at least ${minCourseTitleLength} characters.`);
+        const minBookTitleLength = 1;
+        if (book.title.length < minBookTitleLength) {
+          reject(`Title must be at least ${minBookTitleLength} characters.`);
         }
 
-        if (course.id) {
-          const existingCourseIndex = courses.findIndex(a => a.id == course.id);
-          courses.splice(existingCourseIndex, 1, course);
+        if (book.id) {
+          const existingBookIndex = books.findIndex(a => a.id == book.id);
+          books.splice(existingBookIndex, 1, book);
         } else {
           //Just simulating creation here.
-          //The server would generate ids and watchHref's for new courses in a real app.
+          //The server would generate ids and watchHref's for new books in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
-          course.id = generateId(course);
-          course.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
-          courses.push(course);
+          book.id = generateId(book);
+          book.watchHref = `http://www.pluralsight.com/books/${book.id}`;
+          books.push(book);
         }
 
-        resolve(course);
+        resolve(book);
       }, delay);
     });
   }
 
   //.....
-  static searchCourse(query) {
+  static searchBook(query) {
     debugger;
     const foundBooks = []; 
 
-    for(var i=0;  i<courses.length; i++) {
+    for(var i=0;  i<books.length; i++) {
 
-            for (var j in Object.keys(courses[i])) {
-                 var prop = Object.keys(courses[i])[j];  
-                if (courses[i][prop]=== query) {
-                    foundBooks.push(courses[i]); 
+            for (var j in Object.keys(books[i])) {
+                 var prop = Object.keys(books[i])[j];  
+                if (books[i][prop]=== query) {
+                    foundBooks.push(books[i]); 
                 }
             }
         }
@@ -131,4 +131,4 @@ class CourseApi {
   
 }
 
-export default CourseApi;
+export default BookApi;

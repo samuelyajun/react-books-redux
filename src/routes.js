@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
-import BookSearchPage from './components/course/BookSearchPage';
+import BookSearchPage from './components/book/BookSearchPage';
 // import AboutPage from './components/about/AboutPage';
-import CoursesPage from './components/course/CoursesPage';
-// import ManageCoursePage from './components/course/ManageCoursePage';
+import BooksPage from './components/book/BooksPage';
+// import ManageBookPage from './components/book/ManageBookPage';
 
 
 export default (
 	<Route path="/" component={App}>
-		<IndexRoute component={CoursesPage} />
+		<IndexRoute component={BooksPage} />
 		<Route path="search" component={BookSearchPage} /> 
 	</Route>
 );

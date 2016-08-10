@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import courses from './courseReducer';
+import books from './bookReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
-	courses,
+	books,
 	ajaxCallsInProgress
 });
 

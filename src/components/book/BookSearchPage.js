@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as courseActions from '../../actions/courseActions';
-import CourseList from './CourseList';
+import * as bookActions from '../../actions/bookActions';
+import BookList from './BookList';
 import SearchBar from './SearchBar';
 import {browserHistory} from 'react-router';
 
@@ -11,7 +11,7 @@ class BookSearchPage extends React.Component {
 		super(props, context);
 
 		this.state ={
-			courses: Object.assign({}, this.props.courses)
+			books: Object.assign({}, this.props.books)
 		};
 
 		this.searchBooks = this.searchBooks.bind(this);
@@ -19,43 +19,43 @@ class BookSearchPage extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		debugger;
-		if (this.props.courses.length != nextProps.courses.length) {
-			//Necessary to populate form when existing course is loaded directly.
-			this.setState({courses: Object.assign({}, nextProps.courses)});
+		if (this.props.books.length != nextProps.books.length) {
+			//Necessary to populate form when existing book is loaded directly.
+			this.setState({books: Object.assign({}, nextProps.books)});
 		}
 	}
 
 
-	courseRow(course, index) {
+	bookRow(book, index) {
 		debugger;
-		return <div key={index}>{course.title}</div>;
+		return <div key={index}>{book.title}</div>;
 	}
 
 
 	searchBooks(query) {
-		let courses = this.state.courses;
-		this.props.actions.searchCourse(query)
-			.then(() => this.setState({courses:courses}));
+		let books = this.state.books;
+		this.props.actions.searchBook(query)
+			.then(() => this.setState({books:books}));
 		debugger;
-		// return this.setState({courses:courses});
+		// return this.setState({books:books});
 
 	}
 
 	render() {
 		debugger;
-		const {courses} = this.props;
+		const {books} = this.props;
 		return (
 			<div>
 				<h1>Books</h1>
 				<SearchBar onSearchTermChange={this.searchBooks}  />
-				<CourseList courses={courses}/>
+				<BookList books={books}/>
 			</div>
 		);
 	}
 }
 
 BookSearchPage.propTypes = {
-	courses: PropTypes.array.isRequired,
+	books: PropTypes.array.isRequired,
 	actions: PropTypes.object.isRequired
 	
 };
@@ -68,14 +68,14 @@ BookSearchPage.contextTypes = {
 function mapStateToProps(state, ownProps) {
 	debugger;
 	return {
-		courses: state.courses //course reducer
+		books: state.books //book reducer
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	debugger;
 	return {
-		actions: bindActionCreators(courseActions, dispatch)
+		actions: bindActionCreators(bookActions, dispatch)
 	};
 }
 
